@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/balance_background"
+    tools:context=".ui.BalanceActivity">
+
+    <FrameLayout
+        android:layout_centerVertical="true"
+        android:id="@+id/mainContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        >
+    <RelativeLayout
+        android:id="@+id/balance_container"
+        android:visibility="invisible"
+        android:paddingTop="18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/balance_main_background">
+
+        <TextView
+            android:layout_marginLeft="18dp"
+            android:id="@+id/tvBalanceWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Balance"
+            android:textSize="25sp"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/tvRs"
+            android:layout_marginLeft="18dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R$"
+            android:textSize="40sp"
+            android:textColor="@android:color/holo_green_light"
+            android:layout_below="@id/tvBalanceWord"
+
+            />
+
+        <TextView
+            android:id="@+id/tvBalanceValue"
+            android:layout_marginLeft="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="150,00"
+            android:textSize="40sp"
+            android:textColor="@android:color/holo_green_light"
+            android:layout_toRightOf="@id/tvRs"
+            android:layout_alignTop="@id/tvRs"
+            />
+
+        <LinearLayout
+            android:layout_below="@id/tvRs"
+            android:padding="18dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:background="#eae9e9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:id="@+id/ivLatestMovimentation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:src="@drawable/ic_arrow_upward_black_24dp"/>
+
+            <TextView
+                android:layout_marginLeft="16dp"
+                android:id="@+id/tvLatestMovimentation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Latest movimentation R$1500,00"
+                android:textSize="15sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+        <include
+            android:id="@+id/loadingContainer"
+            layout="@layout/loading_layout"
+            android:visibility="gone"/>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/options_recycler"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        tools:listitem="@layout/options_item"
+        tools:itemCount="1"
+        />
+
+</RelativeLayout>

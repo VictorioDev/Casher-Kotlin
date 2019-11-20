@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="red">#FFF4325C</color>
+    <color name="orange">#FFFB8C66</color>
+    <color name="white">#FCFBFC</color>
+    <color name="gray">#C5A9B4</color>
+    <color name="black">#FF5C4E60</color>
+    <!--
+
+    static Color white = new Color(0xFFFCFBFC);
+  static Color red = new Color(0xFFF4325C);
+  static Color orange = new Color(0xFFFB8C66);
+  static Color gray = new Color(0xFFC5A9B4);
+  static Color black = new Color(0xFF5C4E60);
+
+    -->
+</resources>
