@@ -4,6 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewPropertyAnimator
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.Interpolator
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.Gson
@@ -73,6 +76,9 @@ class LoginActivity : AppCompatActivity() {
                         var intent = Intent(currentContext, BalanceActivity::class.java)
                         intent.putExtra("user_id", user?.user_id)
                         startActivity(intent)
+                        finish()
+
+
                     }
 
 

@@ -17,7 +17,11 @@ class MovimentationsActivity : AppCompatActivity() {
 
         setSupportActionBar(movToolbar)
         //supportActionBar?.title = ""
-        collapsing_toolbar?.title = "R$1245,50"
+
+        var balance = intent.extras?.get("balance")
+
+        balance.let { collapsing_toolbar?.title = "R$$it" }
+
 
         setupRecyclerView()
     }

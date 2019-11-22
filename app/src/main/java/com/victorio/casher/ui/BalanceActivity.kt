@@ -74,6 +74,7 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
                     }
                     var gson = Gson()
                     var summary = gson.fromJson<Summary>(it, Summary::class.java)
+
                     tvBalanceValue.text = summary?.balance
                     if(summary.positive_balance){
                         tvRs.setTextColor(resources.getColor(android.R.color.holo_green_light))
@@ -111,6 +112,7 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
         when(option.name){
             "Movimentations" -> {
                 var intent = Intent(this, MovimentationsActivity::class.java)
+                intent.putExtra("balance", 100.00F)
                 startActivity(intent)
             }
         }
