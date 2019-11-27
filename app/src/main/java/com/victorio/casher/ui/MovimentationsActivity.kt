@@ -16,14 +16,21 @@ class MovimentationsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movimentations)
 
         setSupportActionBar(movToolbar)
-        //supportActionBar?.title = ""
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         var balance = intent.extras?.get("balance")
 
-        balance.let { collapsing_toolbar?.title = "R$$it" }
+        balance.let { collapsing_toolbar?.title = "R$" + "%.2f".format(it) }
 
 
         setupRecyclerView()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 
     private fun setupRecyclerView(){

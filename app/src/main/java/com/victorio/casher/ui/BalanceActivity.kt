@@ -29,6 +29,7 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
 
     var optionsAdapter = OptionsAdapter(this)
     var currentContext = this
+    var balanceValue = 350f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,7 +76,8 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
                     var gson = Gson()
                     var summary = gson.fromJson<Summary>(it, Summary::class.java)
 
-                    tvBalanceValue.text = summary?.balance
+                    //tvBalanceValue.text = summary?.balance
+                    tvBalanceValue.text = "350,00"
                     if(summary.positive_balance){
                         tvRs.setTextColor(resources.getColor(android.R.color.holo_green_light))
                         tvBalanceValue.setTextColor(resources.getColor(android.R.color.holo_green_light))
@@ -112,7 +114,7 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
         when(option.name){
             "Movimentations" -> {
                 var intent = Intent(this, MovimentationsActivity::class.java)
-                intent.putExtra("balance", 100.00F)
+                intent.putExtra("balance", balanceValue)
                 startActivity(intent)
             }
         }
