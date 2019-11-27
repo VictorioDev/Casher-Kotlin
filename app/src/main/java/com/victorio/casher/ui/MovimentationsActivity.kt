@@ -1,15 +1,19 @@
 package com.victorio.casher.ui
 
-import android.app.Activity
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
+import android.view.animation.AnimationUtils
+import android.view.animation.LayoutAnimationController
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.victorio.casher.R
 import kotlinx.android.synthetic.main.activity_movimentations.*
 
+
 class MovimentationsActivity : AppCompatActivity() {
 
     private val currentContext = this
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +40,13 @@ class MovimentationsActivity : AppCompatActivity() {
     private fun setupRecyclerView(){
         var mAdapter = MovimentationsAdapter()
 
+        val animation: LayoutAnimationController = AnimationUtils.loadLayoutAnimation(this, R.anim.movimentations_layout_animation)
+
         movRecyclerView?.apply {
             layoutManager = LinearLayoutManager(currentContext)
             adapter = mAdapter
+            layoutAnimation = animation
         }
     }
+
 }
