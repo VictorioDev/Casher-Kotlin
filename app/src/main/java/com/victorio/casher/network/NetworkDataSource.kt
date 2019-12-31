@@ -6,5 +6,5 @@ interface NetworkDataSource {
 
      fun login(email: String, password: String, loginListener: LoginListener)
 
-     fun testApi(loginListener: LoginListener)
+
 }

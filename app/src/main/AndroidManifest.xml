@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MovimentationsActivity"
-            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"            />
+        <activity android:name=".ui.CreateMovimentationActivity"></activity>
+        <activity
+            android:name=".ui.MovimentationsActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
         <activity
             android:name=".ui.BalanceActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />

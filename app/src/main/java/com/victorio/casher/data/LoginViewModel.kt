@@ -24,10 +24,6 @@ class LoginViewModel: ViewModel(){
     }
     
 
-    fun testApi() {
-        state.postValue(Resource(State.LOADING))
-        networkDataSourceImpl.testApi(LoginListenerImpl(state))
-    }
 
     fun getState(): LiveData<Resource> {
         return state

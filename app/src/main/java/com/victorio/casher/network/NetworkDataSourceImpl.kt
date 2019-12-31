@@ -24,7 +24,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 class NetworkDataSourceImpl : NetworkDataSource{
 
 
-
+    companion object{
+        val BASE_URL = "http://casher-api.herokuapp.com/api/"
+    }
 
     var casherService: CasherService
 
@@ -39,33 +41,7 @@ class NetworkDataSourceImpl : NetworkDataSource{
 
 
 
-    override fun testApi(loginListener: LoginListener) {
-        var call = casherService.testApi()
-        call.enqueue(object : Callback<ResponseBody?> {
-            override fun onFailure(call: Call<ResponseBody?>, t: Throwable) {
-                Log.i("CasherApp", "Failed ${t.message}")
 
-                loginListener.onError(t.message)
-            }
-
-            override fun onResponse(
-                call: Call<ResponseBody?>,
-                response: Response<ResponseBody?>
-            ) {
-                if(response.isSuccessful){
-
-                response?.body()?.string()?.let { loginListener.onSucess(it)
-                    Log.i("CasherApp", "Sucess ${response?.body()!!.string()}, ${response.code()}")}
-            }else{
-
-                Logger.log("É nulo")
-                Logger.log(response?.code().toString())
-            }
-
-
-            }
-        })
-    }
 
     override fun login(email: String, password: String, loginListener: LoginListener) {
 
@@ -81,13 +57,10 @@ class NetworkDataSourceImpl : NetworkDataSource{
                 call: Call<ResponseBody?>,
                 response: Response<ResponseBody?>
             ) {
-
                 if(response.body() != null){
                     response?.body()?.string()?.let { loginListener.onSucess(it)}
                 }else{
-
                     Logger.log("${call.request().url()} - ${response.code()} - ${response}")
-
                 }
 
 

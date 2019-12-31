@@ -26,9 +26,11 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="5dp"
         android:layout_gravity="center_vertical"
-        app:cardCornerRadius="15dp"
-        app:cardBackgroundColor="#ccc"
-        app:contentPadding="15dp">
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="#e6e6e6"
+        app:contentPadding="15dp"
+        app:cardElevation="2dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,11 +40,12 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/text_timeline_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/text_timeline_date"
                 android:textSize="12sp"
-                tools:text="24 JAN"/>
+                android:textStyle="bold"
+                tools:text="24 JAN" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="match_parent"

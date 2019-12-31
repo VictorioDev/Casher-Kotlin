@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import com.victorio.casher.R
 import com.victorio.casher.data.LoginViewModel
 import com.victorio.casher.entity.User
+import com.victorio.casher.network.CasherService
 import com.victorio.casher.network.LoginRequestBody
 import com.victorio.casher.network.NetworkDataSourceImpl
 import kotlinx.android.synthetic.main.activity_login_activity.*
@@ -57,7 +58,7 @@ class LoginActivity : AppCompatActivity() {
             UIUtil.hideKeyboard(this)
             CoroutineScope(Dispatchers.Main).launch {
                 loadingContainer.visibility = View.VISIBLE
-                var cService = NetworkDataSourceImpl().casherService
+                var cService = CasherService.getInstance()
                 var requestBody = LoginRequestBody(emailEditText.text.toString(), passwordEditText.text.toString())
                 var call = withContext(Dispatchers.IO){
                     cService.login(requestBody).execute()

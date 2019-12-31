@@ -2,12 +2,9 @@ package com.victorio.casher.ui
 
 import android.content.Intent
 import android.os.Bundle
-import android.transition.Fade
 import android.view.View
-import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.LayoutAnimationController
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,11 +28,13 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
     var currentContext = this
     var balanceValue = 0f
 
+    var userId = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_balance)
 
-        var userId = intent.getStringExtra("user_id")
+        userId = intent.getStringExtra("user_id")
 
         var mLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         var itemDivider = DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL)
@@ -59,13 +58,16 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
 
             var cService = NetworkDataSourceImpl().casherService
 
-            var call = withContext(Dispatchers.IO){
-                cService.getMovimentations("$userId").execute()
+
+
+
+            var summaryCall = withContext(Dispatchers.IO){
+                cService.getSummary("$userId").execute()
             }
 
-            if(call.isSuccessful){
+            if(summaryCall.isSuccessful){
                 loadingContainer.visibility = View.INVISIBLE
-                var resp = call.body()?.string()
+                var resp = summaryCall.body()?.string()
                 Logger.log(resp)
                 resp.let {
 
@@ -103,7 +105,7 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
 
                 }
             }else {
-                Logger.log("DEU ERRO:  ${call.raw().toString()}")
+                Logger.log("DEU ERRO:  ${summaryCall.raw().toString()}")
             }
 
         }
@@ -115,6 +117,7 @@ class BalanceActivity : AppCompatActivity(), OnOptionClickListener {
             "Movimentations" -> {
                 var intent = Intent(this, MovimentationsActivity::class.java)
                 intent.putExtra("balance", balanceValue)
+                intent.putExtra("user_id", userId)
                 startActivity(intent)
             }
         }
