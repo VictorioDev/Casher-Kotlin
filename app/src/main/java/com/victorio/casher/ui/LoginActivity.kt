@@ -59,7 +59,9 @@ class LoginActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 loadingContainer.visibility = View.VISIBLE
                 var cService = CasherService.getInstance()
-                var requestBody = LoginRequestBody(emailEditText.text.toString(), passwordEditText.text.toString())
+                //var requestBody = LoginRequestBody(emailEditText.text.toString(), passwordEditText.text.toString())
+
+                var requestBody = LoginRequestBody("zezinho123@gmail.com", "123")
                 var call = withContext(Dispatchers.IO){
                     cService.login(requestBody).execute()
                 }
