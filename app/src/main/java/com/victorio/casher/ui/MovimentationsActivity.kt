@@ -198,19 +198,10 @@ class MovimentationsActivity : AppCompatActivity() {
 
     private fun closeCircularRevealAnimation() {
         viewStub.let {
-
             var offsetY = pill_container.y + pill_container.height
             var animSet = AnimatorSet()
-            /* pill_container
-                 .animate()
-                 .translationY((pill_container.height).toFloat())
-                 .setDuration(350)
-                 .setInterpolator(AccelerateDecelerateInterpolator())
-                 .start()*/
-
             var pillContainerAnimation =
                 ObjectAnimator.ofFloat(pill_container, "translationY", 0f, offsetY)
-
             pillContainerAnimation.apply {
                 duration = 350
                 interpolator = AccelerateDecelerateInterpolator()
@@ -218,32 +209,18 @@ class MovimentationsActivity : AppCompatActivity() {
                     pill_container.visibility = View.INVISIBLE
                 }
             }
-
-
             var closeButtonAnimation = ObjectAnimator.ofFloat(btn_close, "alpha", 1F, 0F)
             closeButtonAnimation.duration = 300
             closeButtonAnimation.doOnEnd {
                 btn_close.visibility = View.INVISIBLE
             }
-
             animSet.playTogether(pillContainerAnimation, closeButtonAnimation)
-
             animSet.doOnEnd {
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    //val cx = mov_frame.width?.div(2)
-                    //val cy = mov_frame.height?.div(2)
                     val cx = mov_frame.right
                     val cy = mov_frame.top
-                    // get the final radius for the clipping circle
-
                     val startRadius =
                         hypot(mov_frame.width.toDouble(), mov_frame.height.toDouble()).toFloat()
-
-
-
-                    // create the animator for this view (the start radius is zero)
-
                     val anim =
                         ViewAnimationUtils.createCircularReveal(viewStub, cx, cy, startRadius, 0f  )
                     anim.apply {
@@ -253,24 +230,20 @@ class MovimentationsActivity : AppCompatActivity() {
                         }
                     }
                     anim.start()
-
-
                 }
-
-
             }
             animSet.start()
         }
     }
 
     private fun getMovimentations() {
-
         Log.d("VAZP", "OnResume")
-        CoroutineScope(Dispatchers.Main).launch {
-            var response = withContext(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
+            var response = async {
                 Log.d("VAZP", "User: $userId")
                 cService.getMovimentations(userId!!)
-            }
+            }.await()
+
 
             if (response.isSuccessful) {
                 var movimentationsResponse: MovimentationsResponse =
@@ -284,7 +257,6 @@ class MovimentationsActivity : AppCompatActivity() {
                         movimentations.add(item)
                         mAdapter.notifyItemInserted(movimentations.size - 1)
                     }
-
                 }
             } else {
                 Log.d("VAZP", "Deu ruimmmmmm!")
