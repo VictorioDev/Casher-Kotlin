@@ -182,15 +182,15 @@ class MovimentationsActivity : AppCompatActivity() {
 
                 }
             })
-            // make the view visible and start the animation
+
 
             anim.start()
             Log.d("VAZP", "Entrou aqui!")
 
-            // get the center for the clipping circle
+
 
         } else {
-            // set the view to invisible without a circular reveal animation below Lollipop
+
 
         }
 
@@ -238,11 +238,11 @@ class MovimentationsActivity : AppCompatActivity() {
 
     private fun getMovimentations() {
         Log.d("VAZP", "OnResume")
-        CoroutineScope(Dispatchers.IO).launch {
-            var response = async {
+        CoroutineScope(Dispatchers.Main).launch {
+            var response = withContext(Dispatchers.IO) {
                 Log.d("VAZP", "User: $userId")
                 cService.getMovimentations(userId!!)
-            }.await()
+            }
 
 
             if (response.isSuccessful) {
