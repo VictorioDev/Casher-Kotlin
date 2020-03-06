@@ -42,7 +42,6 @@ class CreateMovimentationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_movimentation)
 
-
         var categoryAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1)
         categoryAdapter.addAll("Transport", "Food")
         mov_category.adapter = categoryAdapter
@@ -67,14 +66,7 @@ class CreateMovimentationActivity : AppCompatActivity() {
             saveMovimentation()
         }
 
-
-
     }
-
-
-
-
-
 
     private fun showDialog(){
         val calendar = Calendar.getInstance()
@@ -110,16 +102,7 @@ class CreateMovimentationActivity : AppCompatActivity() {
             }catch (ex: Exception){
                 Log.d("VAZP", "Erro: ${ex.message} - ${response?.raw()?.request()?.url()}")
             }
-
-
-
         }
-
-
-
-
-
-
 
     }
 }

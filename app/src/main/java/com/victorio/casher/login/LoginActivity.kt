@@ -1,12 +1,9 @@
-package com.victorio.casher.ui
+package com.victorio.casher.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.view.ViewPropertyAnimator
-import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.Interpolator
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.google.gson.Gson
@@ -15,7 +12,8 @@ import com.victorio.casher.data.LoginViewModel
 import com.victorio.casher.entity.User
 import com.victorio.casher.network.CasherService
 import com.victorio.casher.network.LoginRequestBody
-import com.victorio.casher.network.NetworkDataSourceImpl
+import com.victorio.casher.ui.BalanceActivity
+import com.victorio.casher.ui.RegisterActivity
 import kotlinx.android.synthetic.main.activity_login_activity.*
 import kotlinx.coroutines.*
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
