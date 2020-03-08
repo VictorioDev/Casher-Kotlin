@@ -9,33 +9,30 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.gson.Gson
 import com.victorio.casher.R
 import com.victorio.casher.data.LoginViewModel
+import com.victorio.casher.dependencyinjection.ControllerCompositionRoot
 import com.victorio.casher.entity.User
 import com.victorio.casher.network.CasherService
 import com.victorio.casher.network.LoginRequestBody
 import com.victorio.casher.ui.BalanceActivity
 import com.victorio.casher.ui.RegisterActivity
-import kotlinx.android.synthetic.main.activity_login_activity.*
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.coroutines.*
 import net.yslibrary.android.keyboardvisibilityevent.util.UIUtil
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var viewModel : LoginViewModel
-    private var currentContext = this
+    private lateinit var mControllerCompositionRoot : ControllerCompositionRoot
+    private lateinit var mViewMvc : LoginViewMvc
+    private lateinit var mControllerMvc : LoginControllerMvc
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login_activity)
-
-
-
-
-
-        viewModel = ViewModelProviders.of(this)[LoginViewModel::class.java]
-
-
-
+        mControllerCompositionRoot = ControllerCompositionRoot(this)
+        mViewMvc = mControllerCompositionRoot.getLoginViewMvc()
+        mControllerMvc = mControllerCompositionRoot.getLoginControllerMvc()
+        mControllerMvc.bindView(mViewMvc)
+        setContentView(mViewMvc.getView())
 
         /*viewModel.getState().observe(this, Observer {
             com.victorio.casher.Utils.Logger.log(it.state.name)
@@ -53,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         })*/
 
         loginButton.setOnClickListener{
-            UIUtil.hideKeyboard(this)
+
             CoroutineScope(Dispatchers.Main).launch {
                 loadingContainer.visibility = View.VISIBLE
                 var cService = CasherService.getInstance()
@@ -100,5 +97,21 @@ class LoginActivity : AppCompatActivity() {
 
 
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mControllerMvc.onStart()
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        mControllerMvc.onStop()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mControllerCompositionRoot.onDestroy()
     }
 }

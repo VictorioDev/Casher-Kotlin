@@ -1,6 +1,6 @@
 package com.victorio.casher.common
 
-interface ObservableMvc<ListenerType> {
+interface BaseObservableInterface<ListenerType> {
 
     fun registerListener(listener: ListenerType)
 

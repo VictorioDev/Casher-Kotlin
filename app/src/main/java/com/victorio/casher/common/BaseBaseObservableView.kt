@@ -1,6 +1,7 @@
 package com.victorio.casher.common
 
-abstract class BaseObservableView<ListenerType> : BaseView(), ObservableMvc<ListenerType> {
+abstract class BaseBaseObservableView<ListenerType> : BaseView(),
+    BaseObservableViewInterface<ListenerType> {
 
     protected var listenersList = arrayListOf<ListenerType>()
 

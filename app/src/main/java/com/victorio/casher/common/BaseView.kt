@@ -2,14 +2,16 @@ package com.victorio.casher.common
 
 import android.view.View
 
-abstract class BaseView {
+ abstract class BaseView : ViewMvc{
 
-    protected lateinit var rootView : View
+    private lateinit var rootView : View
 
-    fun setView(view: View){
-        rootView = view
-        setupView()
-    }
+     override fun setView(view: View) {
+         rootView = view
+         setupViews()
+     }
 
-    abstract fun setupView()
-}
+     override fun getView() = rootView
+
+     protected abstract fun setupViews()
+ }
